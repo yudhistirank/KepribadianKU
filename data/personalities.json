@@ -1,0 +1,162 @@
+[
+  {
+    "type": "INTJ",
+    "personality": "The Architect",
+    "image": "https://example.com/images/intj.png",
+    "description": "Pemikir strategis dan visioner yang selalu memiliki rencana untuk masa depan.",
+    "career": ["Ilmuwan", "Insinyur", "Perencana Strategi", "Analis Data"],
+    "lovers": "Cocok dengan ENFP atau ENTP.",
+    "friendship": "Menghargai teman yang cerdas dan berorientasi tujuan.",
+    "characteristic": ["Analitis", "Mandiri", "Perfeksionis", "Visioner"]
+  },
+  {
+    "type": "INTP",
+    "personality": "The Logician",
+    "image": "https://example.com/images/intp.png",
+    "description": "Pemikir kreatif yang haus akan pengetahuan dan suka memecahkan misteri dunia.",
+    "career": ["Programmer", "Ilmuwan", "Penulis", "Filsuf"],
+    "lovers": "Cocok dengan ENFJ atau ENTJ.",
+    "friendship": "Menyukai teman yang bisa berdiskusi mendalam dan berpikir logis.",
+    "characteristic": ["Inovatif", "Rasional", "Intelektual", "Mandiri"]
+  },
+  {
+    "type": "ENTJ",
+    "personality": "The Commander",
+    "image": "https://example.com/images/entj.png",
+    "description": "Pemimpin alami yang percaya diri dan tegas dalam mengambil keputusan.",
+    "career": ["CEO", "Manajer", "Pengacara", "Wirausahawan"],
+    "lovers": "Cocok dengan INTP atau ISTP.",
+    "friendship": "Menghargai teman yang kompeten dan ambisius.",
+    "characteristic": ["Dominan", "Efisien", "Visioner", "Tegas"]
+  },
+  {
+    "type": "ENTP",
+    "personality": "The Debater",
+    "image": "https://example.com/images/entp.png",
+    "description": "Pemikir cepat yang senang menantang ide dan menciptakan inovasi baru.",
+    "career": ["Pengacara", "Startup Founder", "Marketing Strategist"],
+    "lovers": "Cocok dengan INFJ atau INTJ.",
+    "friendship": "Suka teman yang terbuka dan suka berdiskusi.",
+    "characteristic": ["Cerdas", "Kreatif", "Percaya Diri", "Adaptif"]
+  },
+  {
+    "type": "INFJ",
+    "personality": "The Advocate",
+    "image": "https://example.com/images/infj.png",
+    "description": "Idealistis dan peduli, dengan hasrat untuk membuat dunia menjadi tempat yang lebih baik.",
+    "career": ["Psikolog", "Guru", "Penulis", "Konselor"],
+    "lovers": "Cocok dengan ENTP atau ENFP.",
+    "friendship": "Teman yang setia dan selalu siap mendengarkan.",
+    "characteristic": ["Empatik", "Bijak", "Visioner", "Perfeksionis"]
+  },
+  {
+    "type": "INFP",
+    "personality": "The Mediator",
+    "image": "https://example.com/images/infp.png",
+    "description": "Sensitif dan imajinatif, selalu mencari makna dan kedamaian batin.",
+    "career": ["Penulis", "Desainer", "Konselor", "Seniman"],
+    "lovers": "Cocok dengan ENFJ atau ENTJ.",
+    "friendship": "Teman yang lembut, mendalam, dan penuh empati.",
+    "characteristic": ["Idealistis", "Kreatif", "Ramah", "Pendiam"]
+  },
+  {
+    "type": "ENFJ",
+    "personality": "The Protagonist",
+    "image": "https://example.com/images/enfj.png",
+    "description": "Pemimpin karismatik yang menginspirasi orang lain dengan semangatnya.",
+    "career": ["Guru", "Motivator", "Politikus", "Konsultan"],
+    "lovers": "Cocok dengan INFP atau ISFP.",
+    "friendship": "Peduli, suportif, dan suka membantu orang berkembang.",
+    "characteristic": ["Empatik", "Inspiratif", "Berorientasi Tim", "Optimis"]
+  },
+  {
+    "type": "ENFP",
+    "personality": "The Campaigner",
+    "image": "https://example.com/images/enfp.png",
+    "description": "Antusias, imajinatif, dan suka menjelajahi ide serta hubungan baru.",
+    "career": ["Jurnalis", "Desainer", "Public Relations", "Penulis"],
+    "lovers": "Cocok dengan INFJ atau INTJ.",
+    "friendship": "Suka berteman dengan orang yang autentik dan terbuka.",
+    "characteristic": ["Kreatif", "Energik", "Peka", "Bersemangat"]
+  },
+  {
+    "type": "ISTJ",
+    "personality": "The Logistician",
+    "image": "https://example.com/images/istj.png",
+    "description": "Praktis, bertanggung jawab, dan menghargai tradisi serta keteraturan.",
+    "career": ["Akuntan", "Polisi", "Administrator", "Manajer"],
+    "lovers": "Cocok dengan ESFP atau ESTP.",
+    "friendship": "Setia dan dapat diandalkan, tapi tidak suka drama.",
+    "characteristic": ["Teliti", "Disiplin", "Terorganisir", "Konsisten"]
+  },
+  {
+    "type": "ISFJ",
+    "personality": "The Defender",
+    "image": "https://example.com/images/isfj.png",
+    "description": "Penuh perhatian, setia, dan sangat peduli dengan kesejahteraan orang lain.",
+    "career": ["Perawat", "Guru", "Psikolog", "Administrasi"],
+    "lovers": "Cocok dengan ESTP atau ESFP.",
+    "friendship": "Teman yang setia dan suka membantu.",
+    "characteristic": ["Hangat", "Teliti", "Setia", "Sabar"]
+  },
+  {
+    "type": "ESTJ",
+    "personality": "The Executive",
+    "image": "https://example.com/images/estj.png",
+    "description": "Pemimpin kuat yang suka memastikan segala sesuatu berjalan sesuai aturan.",
+    "career": ["Manajer", "Polisi", "Wirausaha", "Administrator"],
+    "lovers": "Cocok dengan ISFP atau ISTP.",
+    "friendship": "Menghargai efisiensi dan kerja sama dalam hubungan.",
+    "characteristic": ["Disiplin", "Praktis", "Tegas", "Organisatoris"]
+  },
+  {
+    "type": "ESFJ",
+    "personality": "The Consul",
+    "image": "https://example.com/images/esfj.png",
+    "description": "Peduli, ramah, dan suka membantu orang lain merasa diterima.",
+    "career": ["Guru", "Perawat", "Event Organizer", "Customer Service"],
+    "lovers": "Cocok dengan ISFP atau INFP.",
+    "friendship": "Teman yang hangat dan penuh empati.",
+    "characteristic": ["Sosial", "Hangat", "Setia", "Peka"]
+  },
+  {
+    "type": "ISTP",
+    "personality": "The Virtuoso",
+    "image": "https://example.com/images/istp.png",
+    "description": "Eksperimen, praktis, dan suka memecahkan masalah secara langsung.",
+    "career": ["Teknisi", "Mekanik", "Ahli IT", "Pilot"],
+    "lovers": "Cocok dengan ESTJ atau ENTJ.",
+    "friendship": "Tenang tapi dapat diandalkan dalam situasi sulit.",
+    "characteristic": ["Logis", "Mandiri", "Spontan", "Tangguh"]
+  },
+  {
+    "type": "ISFP",
+    "personality": "The Adventurer",
+    "image": "https://example.com/images/isfp.png",
+    "description": "Sensitif, artistik, dan menikmati momen tanpa banyak rencana.",
+    "career": ["Seniman", "Desainer", "Fotografer", "Musisi"],
+    "lovers": "Cocok dengan ESFJ atau ENFJ.",
+    "friendship": "Santai, lembut, dan menyenangkan untuk diajak jalan.",
+    "characteristic": ["Santai", "Artistik", "Peka", "Fleksibel"]
+  },
+  {
+    "type": "ESTP",
+    "personality": "The Entrepreneur",
+    "image": "https://example.com/images/estp.png",
+    "description": "Berani, spontan, dan senang mengambil risiko demi pengalaman baru.",
+    "career": ["Sales", "Atlet", "Pilot", "Marketing"],
+    "lovers": "Cocok dengan ISFJ atau ISTJ.",
+    "friendship": "Teman yang seru, spontan, dan penuh energi.",
+    "characteristic": ["Petualang", "Percaya Diri", "Cepat", "Adaptif"]
+  },
+  {
+    "type": "ESFP",
+    "personality": "The Entertainer",
+    "image": "https://example.com/images/esfp.png",
+    "description": "Penuh energi, ceria, dan selalu mencari kesenangan dalam hidup.",
+    "career": ["Aktor", "Musisi", "Host", "Influencer"],
+    "lovers": "Cocok dengan ISTJ atau ISFJ.",
+    "friendship": "Teman yang menyenangkan dan selalu membawa suasana positif.",
+    "characteristic": ["Energik", "Ceria", "Sosial", "Hangat"]
+  }
+]
