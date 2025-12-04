@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# Backend - MBTI Personality Test API
-=======
 # Dokumentasi API - KepribadianKU
->>>>>>> a6092d8b5b71895653121b3ff4cfb3e31fd8d5a0
 
 Backend MBTI Personality Test adalah API yang menyediakan fitur tes kepribadian berdasarkan indikator Myers-Briggs Type Indicator (MBTI). API ini memungkinkan pengguna untuk menjawab pertanyaan, menghitung hasil, dan melihat tipe kepribadian mereka.
 
@@ -221,9 +217,3 @@ Tes ini mengukur 4 pasangan dimensi utama:
 3. Jika `reverse: true`, maka skor dibalik menjadi **(6 - skor)**.
 4. Nilai total tiap dimensi dijumlahkan.
 5. Dimensi dengan skor lebih tinggi dari setiap pasangan menentukan tipe MBTI.
-
-<<<<<<< HEAD
----
-=======
----
->>>>>>> a6092d8b5b71895653121b3ff4cfb3e31fd8d5a0
