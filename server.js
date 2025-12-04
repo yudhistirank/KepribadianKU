@@ -13,6 +13,11 @@ connectDB();
 
 const app = express();
 app.use(cors());
+
+const allowedOrigins = [
+  "https://kepribadianku.vercel.app",
+];
+
 app.use(express.json());
 
 // routes
