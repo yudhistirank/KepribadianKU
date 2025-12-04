@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import api from "../api/apiClient";
 import PersonalityCard from "../components/PersonalityCard";
-import { UserGroupIcon } from "@heroicons/react/24/outline";
+import { SparklesIcon } from "@heroicons/react/24/solid"; // Menggunakan icon yang lebih estetik
 
-export default function PersonalityList(){
+export default function PersonalityList() {
   const [types, setTypes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -23,157 +23,181 @@ export default function PersonalityList(){
     })();
   }, []);
 
-  // Group personalities by their first letter (E/I)
+  // Filter Logic
   const categories = {
     all: types,
-    extrovert: types.filter(t => t.type.startsWith('E')),
-    introvert: types.filter(t => t.type.startsWith('I'))
+    extrovert: types.filter((t) => t.type.startsWith("E")),
+    introvert: types.filter((t) => t.type.startsWith("I")),
   };
 
+  const filteredData = categories[selectedCategory];
+
+  // Animation Variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
+      transition: { staggerChildren: 0.05 },
+    },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30, scale: 0.9 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
+      scale: 1,
+      transition: { type: "spring", stiffness: 50, damping: 15 },
+    },
+    exit: { opacity: 0, scale: 0.9, transition: { duration: 0.2 } }
   };
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-16">
+      <div className="min-h-[60vh] flex flex-col items-center justify-center">
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full"
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full"
         />
+        <p className="mt-4 text-indigo-400 font-medium animate-pulse">Memuat Karakteristik...</p>
       </div>
     );
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="space-y-8"
-    >
-      {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="text-center"
-      >
-        <div className="inline-flex items-center gap-2 px-6 py-3 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-6">
-          <UserGroupIcon className="w-4 h-4" />
-          Jelajahi 16 Tipe Kepribadian
-        </div>
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Semua Tipe MBTI
-        </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Temukan karakteristik unik dari setiap tipe kepribadian Myers-Briggs Type Indicator
-        </p>
-      </motion.div>
+    <div className="relative min-h-screen pb-20 overflow-hidden">
+      {/* Background Decor - Abstrak Blob */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+        <div className="absolute top-[-10%] right-[-10%] w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-32 left-20 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+      </div>
 
-      {/* Category Filter */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-        className="flex justify-center"
-      >
-        <div className="bg-white p-2 rounded-xl shadow-lg border border-gray-200">
-          <div className="flex gap-2">
-            {[
-              { key: 'all', label: 'Semua', icon: null },
-              { key: 'extrovert', label: 'Ekstrovert (E)', icon: null },
-              { key: 'introvert', label: 'Introvert (I)', icon: null }
-            ].map(category => (
-              <button
-                key={category.key}
-                onClick={() => setSelectedCategory(category.key)}
-                className={`px-8 py-4 rounded-2xl font-semibold transition-all duration-200 ${
-                  selectedCategory === category.key
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
-                }`}
-              >
-                {category.icon && <category.icon className="w-4 h-4" />}
-                {category.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Results Count */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.5 }}
-        className="text-center"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12"
       >
-        <p className="text-gray-600">
-          Menampilkan {categories[selectedCategory].length} tipe kepribadian
-        </p>
-      </motion.div>
-
-      {/* Personality Grid */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="grid grid-cols-1 md:grid-cols-2 gap-6"
-      >
-        {categories[selectedCategory].map((personality) => (
+        {/* --- Header Section --- */}
+        <div className="text-center pt-10 space-y-4">
           <motion.div
-            key={personality.type}
-            variants={itemVariants}
-            whileHover={{ y: -5 }}
-            className="h-full"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            <PersonalityCard p={personality} />
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 backdrop-blur-sm border border-indigo-100 text-indigo-600 text-sm font-semibold shadow-sm mb-4">
+              <SparklesIcon className="w-4 h-4 text-yellow-500" />
+              Explorasi Diri
+            </span>
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 mb-4">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
+                16 Tipe Kepribadian
+              </span>
+            </h1>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Pahami dirimu dan orang lain lebih dalam. Temukan bagaimana setiap tipe berinteraksi dengan dunia.
+            </p>
           </motion.div>
-        ))}
-      </motion.div>
-
-      {/* Information */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 0.5 }}
-        className="bg-gradient-to-r from-blue-50 to-indigo-50 p-8 rounded-2xl border border-blue-200"
-      >
-        <div className="text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-2xl mb-6">
-            <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-            </svg>
-          </div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-4">
-            Keunikan Setiap Tipe Kepribadian
-          </h3>
-          <p className="text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Tidak ada tipe yang "lebih baik" dari yang lain. Setiap kombinasi dari 4 dimensi MBTI
-            (Introversion/Extraversion, Sensing/Intuition, Thinking/Feeling, Judging/Perceiving)
-            menciptakan perspektif yang berharga dan cara pandang yang unik terhadap dunia.
-          </p>
         </div>
+
+        {/* --- Floating Filter Menu --- */}
+        <div className="sticky top-4 z-30 flex justify-center">
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="p-1.5 bg-white/80 backdrop-blur-md border border-gray-200/50 rounded-2xl shadow-xl flex gap-1"
+          >
+            {[
+              { key: "all", label: "Semua" },
+              { key: "extrovert", label: "Extrovert (E)" },
+              { key: "introvert", label: "Introvert (I)" },
+            ].map((tab) => {
+              const isActive = selectedCategory === tab.key;
+              return (
+                <button
+                  key={tab.key}
+                  onClick={() => setSelectedCategory(tab.key)}
+                  className={`
+                    relative px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300
+                    ${isActive ? "text-white" : "text-gray-500 hover:text-gray-900 hover:bg-gray-100/50"}
+                  `}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeFilter"
+                      className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl shadow-md"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                  <span className="relative z-10">{tab.label}</span>
+                </button>
+              );
+            })}
+          </motion.div>
+        </div>
+
+        {/* --- Results Count --- */}
+        <div className="text-center text-sm font-medium text-gray-400">
+           Menampilkan {filteredData.length} hasil
+        </div>
+
+        {/* --- Grid Layout --- */}
+        <motion.div
+          layout
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredData.map((personality) => (
+              <motion.div
+                layout
+                key={personality.type}
+                variants={itemVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                className="h-full"
+              >
+                {/* Wrapper agar Card terlihat lebih menonjol */}
+                <div className="h-full transform transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/20 rounded-3xl">
+                   <PersonalityCard p={personality} />
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* --- Footer Info --- */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mt-20 relative overflow-hidden rounded-3xl bg-indigo-900 text-white p-10 md:p-16 text-center shadow-2xl"
+        >
+          {/* Decorative circles inside footer */}
+          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-white opacity-5"></div>
+          <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-40 h-40 rounded-full bg-white opacity-5"></div>
+          
+          <div className="relative z-10 max-w-3xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-bold mb-6">
+              Setiap Kepribadian Itu Unik
+            </h3>
+            <p className="text-indigo-200 text-lg leading-relaxed mb-8">
+              Tidak ada tipe yang "lebih baik" dari yang lain. Kombinasi 
+              <span className="text-white font-semibold"> Introversion/Extraversion</span>, 
+              <span className="text-white font-semibold"> Sensing/Intuition</span>, 
+              <span className="text-white font-semibold"> Thinking/Feeling</span>, dan 
+              <span className="text-white font-semibold"> Judging/Perceiving </span>
+              menciptakan perspektif dunia yang berwarna.
+            </p>
+          </div>
+        </motion.div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 }

@@ -1,162 +1,226 @@
-import React from "react";
+import React, { useEffect } from "react"; // Tambahkan useEffect
 import { Link } from "react-router-dom";
-import { CheckCircleIcon, ClockIcon, UserGroupIcon, ChartBarIcon } from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
+import { 
+  CheckBadgeIcon, 
+  ClockIcon, 
+  DocumentTextIcon, 
+  ChartBarIcon, 
+  SparklesIcon,
+  ArrowRightIcon,
+  BoltIcon
+} from "@heroicons/react/24/outline";
 
 export default function Home() {
+  // --- LOGIC SCROLL TO TOP ---
+  // Setiap kali halaman ini dibuka, scroll otomatis ke paling atas
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // Variabel animasi
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.6, ease: "easeOut" } 
+    }
+  };
+
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-indigo-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
-          <div className="text-center">
-            <div className="inline-flex items-center px-6 py-3 rounded-full bg-blue-100 text-blue-800 text-sm font-medium mb-12">
-              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              Temukan Tipe Kepribadian Anda
-            </div>
+    <div className="relative min-h-screen w-full overflow-hidden bg-gray-50/50">
+      
+      {/* --- Background Decor --- */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+        <div className="absolute top-[20%] right-[-10%] w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+        <div className="absolute bottom-[-10%] left-[20%] w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+      </div>
 
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-8 leading-tight">
-              Kepribadian<span className="text-blue-600">Ku</span>
-            </h1>
+      {/* --- HERO SECTION --- */}
+      <div className="relative pt-32 pb-32 lg:pt-40 lg:pb-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+            className="max-w-4xl mx-auto"
+          >
+            {/* Badge */}
+            <motion.div variants={itemVariants} className="flex justify-center mb-8">
+              <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-white border border-blue-100 text-blue-600 text-sm font-semibold shadow-sm backdrop-blur-sm">
+                <SparklesIcon className="w-4 h-4 mr-2 text-yellow-500" />
+                Temukan Potensi Tersembunyi Anda
+              </span>
+            </motion.div>
 
-            <p className="text-xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed">
-              Platform terpercaya untuk menganalisis tipe kepribadian MBTI Anda melalui tes komprehensif dengan 80 pertanyaan ilmiah.
-              Dapatkan pemahaman mendalam tentang karakteristik unik diri Anda.
-            </p>
+            {/* Headline */}
+            <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-extrabold text-gray-900 mb-8 tracking-tight leading-tight">
+              Kenali Diri, <br/>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
+                Pahami Potensi
+              </span>
+            </motion.h1>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+            {/* Subheading */}
+            <motion.p variants={itemVariants} className="text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl mx-auto">
+              Tes kepribadian berbasis MBTI yang dirancang untuk membantu Anda memahami kekuatan, kelemahan, dan cara Anda berinteraksi dengan dunia.
+            </motion.p>
+
+            {/* Buttons */}
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
                 to="/intro"
-                className="group bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-2xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                className="group relative px-8 py-4 bg-blue-600 text-white rounded-2xl font-bold text-lg shadow-lg shadow-blue-500/30 hover:shadow-blue-500/40 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
               >
-                Mulai Tes MBTI
-                <svg className="inline-block ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
+                <div className="absolute inset-0 bg-white/20 group-hover:translate-x-full transition-transform duration-500 skew-x-12 -ml-4 w-[150%]"></div>
+                <span className="relative flex items-center gap-2">
+                  Mulai Tes Sekarang
+                  <ArrowRightIcon className="w-5 h-5" />
+                </span>
               </Link>
+              
               <Link
                 to="/types"
-                className="group bg-white border-2 border-blue-200 hover:border-blue-300 hover:bg-blue-50 text-gray-700 hover:text-blue-700 px-10 py-5 rounded-2xl font-semibold text-lg transition-all duration-300"
+                className="px-8 py-4 bg-white text-gray-700 border border-gray-200 rounded-2xl font-bold text-lg hover:bg-gray-50 hover:border-gray-300 hover:text-blue-600 transition-all duration-300"
               >
                 Jelajahi Tipe MBTI
               </Link>
-            </div>
+            </motion.div>
+          </motion.div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-blue-100">
-                <div className="text-4xl font-bold text-blue-600 mb-2">16</div>
-                <div className="text-gray-600 font-medium">Tipe Kepribadian</div>
-              </div>
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-blue-100">
-                <div className="text-4xl font-bold text-blue-600 mb-2">80</div>
-                <div className="text-gray-600 font-medium">Pertanyaan</div>
-              </div>
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-blue-100">
-                <div className="text-4xl font-bold text-blue-600 mb-2">8-12</div>
-                <div className="text-gray-600 font-medium">Menit</div>
-              </div>
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-blue-100">
-                <div className="text-4xl font-bold text-blue-600 mb-2">100%</div>
-                <div className="text-gray-600 font-medium">Akurat</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Background decoration */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-          <div className="absolute top-20 left-10 w-96 h-96 bg-blue-200 rounded-full opacity-10 blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-[32rem] h-[32rem] bg-indigo-200 rounded-full opacity-10 blur-3xl"></div>
         </div>
       </div>
 
-      {/* Features Section */}
-      <div className="py-24 bg-white">
+      {/* --- STATS SECTION (Floating Glass Cards) --- */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6"
+        >
+          {[
+            { label: "Tipe Kepribadian", value: "16", icon: SparklesIcon },
+            { label: "Pertanyaan", value: "80", icon: DocumentTextIcon },
+            { label: "Durasi (Menit)", value: "10", icon: ClockIcon },
+            { label: "Akurasi", value: "99%", icon: CheckBadgeIcon },
+          ].map((stat, idx) => (
+            <div key={idx} className="bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-xl border border-white/50 text-center hover:transform hover:scale-105 transition-transform duration-300">
+               <div className="flex justify-center mb-3">
+                 <stat.icon className="w-8 h-8 text-blue-500/80" />
+               </div>
+               <div className="text-3xl font-black text-gray-800 mb-1">{stat.value}</div>
+               <div className="text-sm font-medium text-gray-500">{stat.label}</div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* --- FEATURES SECTION --- */}
+      <div className="py-32 bg-white/50 backdrop-blur-sm relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Keunggulan Platform Kami
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Mengapa Platform Kami?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Teknologi analisis kepribadian terkini dengan akurasi tinggi dan pemahaman mendalam
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Teknologi analisis modern yang memberikan wawasan mendalam tentang diri Anda.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center p-8 rounded-2xl hover:bg-blue-50 transition-all duration-300 border border-blue-100 hover:border-blue-200">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-2xl mb-6">
-                <svg className="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">Akurat & Valid</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Metode penilaian berdasarkan standar MBTI internasional dengan validitas terbukti
-              </p>
-            </div>
-
-            <div className="text-center p-8 rounded-2xl hover:bg-blue-50 transition-all duration-300 border border-blue-100 hover:border-blue-200">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-2xl mb-6">
-                <svg className="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">Cepat & Efisien</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Proses analisis cepat dengan hasil instan tanpa menunggu lama
-              </p>
-            </div>
-
-            <div className="text-center p-8 rounded-2xl hover:bg-blue-50 transition-all duration-300 border border-blue-100 hover:border-blue-200">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-2xl mb-6">
-                <svg className="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">Detail Lengkap</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Analisis mendalam dengan penjelasan karakteristik tipe kepribadian
-              </p>
-            </div>
-
-            <div className="text-center p-8 rounded-2xl hover:bg-blue-50 transition-all duration-300 border border-blue-100 hover:border-blue-200">
-              <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-2xl mb-6">
-                <svg className="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900">Visualisasi Data</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Representasi grafis yang membantu memahami hasil analisis dengan mudah
-              </p>
-            </div>
+            <FeatureCard 
+              icon={CheckBadgeIcon}
+              title="Akurat & Valid"
+              desc="Metode penilaian yang dikalibrasi dengan standar psikologi modern."
+              color="text-green-500"
+              bg="bg-green-50"
+            />
+            <FeatureCard 
+              icon={BoltIcon}
+              title="Cepat & Instan"
+              desc="Algoritma cerdas yang memproses jawaban Anda secara real-time."
+              color="text-yellow-500"
+              bg="bg-yellow-50"
+            />
+            <FeatureCard 
+              icon={DocumentTextIcon}
+              title="Laporan Detail"
+              desc="Bukan sekadar kode 4 huruf, tapi analisis mendalam tentang potensi karir & hubungan."
+              color="text-blue-500"
+              bg="bg-blue-50"
+            />
+             <FeatureCard 
+              icon={ChartBarIcon}
+              title="Visualisasi Data"
+              desc="Grafik interaktif untuk melihat dominasi sifat Introvert vs Ekstrovert Anda."
+              color="text-purple-500"
+              bg="bg-purple-50"
+            />
           </div>
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="py-24 bg-gradient-to-r from-blue-600 to-indigo-700">
-        <div className="max-w-5xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-white mb-6">
-            Mulai Perjalanan Pengenalan Diri Anda
-          </h2>
-          <p className="text-xl text-blue-100 mb-12 leading-relaxed">
-            Bergabunglah dengan komunitas profesional yang telah memahami kepribadian mereka
-          </p>
-          <Link
-            to="/intro"
-            className="inline-flex items-center bg-white text-blue-600 px-12 py-5 rounded-2xl font-bold text-xl shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all duration-300 transform hover:-translate-y-1"
-          >
-            <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-            Mulai Tes Sekarang
-          </Link>
-        </div>
+      {/* --- CTA SECTION --- */}
+      <div className="py-20 px-4">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="max-w-5xl mx-auto bg-gradient-to-r from-blue-600 to-indigo-700 rounded-[2.5rem] p-12 md:p-20 text-center text-white shadow-2xl relative overflow-hidden"
+        >
+          {/* Decorative Circles */}
+          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-white opacity-10 blur-2xl"></div>
+          <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-60 h-60 rounded-full bg-indigo-400 opacity-20 blur-2xl"></div>
+
+          <div className="relative z-10">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              Siap Menjelajahi Diri Sendiri?
+            </h2>
+            <p className="text-blue-100 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+              Jangan biarkan potensi Anda tersembunyi. Bergabunglah dengan ribuan orang yang telah menemukan arah hidup mereka.
+            </p>
+            <Link
+              to="/intro"
+              className="inline-flex items-center px-10 py-4 bg-white text-blue-700 rounded-2xl font-bold text-lg hover:bg-blue-50 hover:scale-105 transition-all duration-300 shadow-lg"
+            >
+              <BoltIcon className="w-6 h-6 mr-2" />
+              Ambil Tes Gratis
+            </Link>
+          </div>
+        </motion.div>
       </div>
 
     </div>
+  );
+}
+
+// Komponen Kecil untuk Kartu Fitur agar kode lebih rapi
+function FeatureCard({ icon: Icon, title, desc, color, bg }) {
+  return (
+    <motion.div 
+      whileHover={{ y: -10 }}
+      className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300"
+    >
+      <div className={`w-14 h-14 ${bg} ${color} rounded-2xl flex items-center justify-center mb-6`}>
+        <Icon className="w-7 h-7" />
+      </div>
+      <h3 className="text-xl font-bold text-gray-900 mb-3">{title}</h3>
+      <p className="text-gray-500 leading-relaxed text-sm">
+        {desc}
+      </p>
+    </motion.div>
   );
 }

@@ -1,173 +1,198 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { PlayIcon, ClockIcon, CheckCircleIcon, LightBulbIcon } from "@heroicons/react/24/outline";
+import { 
+  PlayIcon, 
+  ClockIcon, 
+  CheckBadgeIcon, 
+  LightBulbIcon,
+  BoltIcon,
+  HeartIcon,
+  GlobeAsiaAustraliaIcon,
+  ShieldCheckIcon
+} from "@heroicons/react/24/outline";
 
-export default function TestIntro(){
+export default function TestIntro() {
   const navigate = useNavigate();
 
   const handleStartTest = () => {
     navigate('/test');
   };
 
+  // Variabel Animasi
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.5, ease: "easeOut" } 
+    }
+  };
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="max-w-4xl mx-auto"
-    >
-      {/* Hero Section */}
+    <div className="relative min-h-screen w-full overflow-hidden bg-gray-50/50 pt-24 pb-20">
+      
+      {/* --- Background Decor (Konsisten dengan Home) --- */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div className="absolute top-[-10%] left-[20%] w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+        <div className="absolute top-[40%] right-[-10%] w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+        <div className="absolute bottom-[-10%] left-[-10%] w-96 h-96 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+      </div>
+
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-        className="text-center mb-12"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="max-w-4xl mx-auto px-4 sm:px-6"
       >
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium mb-6">
-          <LightBulbIcon className="w-4 h-4" />
-          Persiapan Tes Kepribadian
-        </div>
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Siap Menemukan Diri{' '}
-          <span className="text-indigo-600">Sebenarnya?</span>
-        </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Tes ini akan membantu Anda memahami tipe kepribadian MBTI Anda melalui serangkaian pertanyaan yang telah disiapkan secara ilmiah.
-        </p>
-      </motion.div>
-
-      {/* Instructions */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 0.5 }}
-        className="bg-white p-10 rounded-3xl shadow-lg border border-blue-100 mb-10"
-      >
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-          Panduan Tes MBTI
-        </h2>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-4">
-            <div className="flex items-start gap-3">
-              <CheckCircleIcon className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
-              <div>
-                <h3 className="font-semibold text-gray-800">Tidak Ada Jawaban Benar/Salah</h3>
-                <p className="text-gray-600 text-sm">Pilih jawaban yang paling sesuai dengan perasaan dan pengalaman Anda.</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <CheckCircleIcon className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
-              <div>
-                <h3 className="font-semibold text-gray-800">Skala Penilaian</h3>
-                <p className="text-gray-600 text-sm">Skor 1 (Sangat tidak setuju) hingga 5 (Sangat setuju).</p>
-              </div>
-            </div>
+        {/* --- HERO HEADER --- */}
+        <motion.div variants={itemVariants} className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-indigo-100 text-indigo-600 rounded-full text-sm font-semibold shadow-sm mb-6">
+            <LightBulbIcon className="w-4 h-4" />
+            Persiapan Tes Kepribadian
           </div>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+            Siap Menemukan Diri{' '}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+              Sebenarnya?
+            </span>
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Luangkan waktu sejenak untuk mengenal diri Anda lebih dalam melalui 
+            pertanyaan psikologis yang dirancang khusus.
+          </p>
+        </motion.div>
 
-          <div className="space-y-4">
-            <div className="flex items-start gap-3">
-              <ClockIcon className="w-6 h-6 text-blue-500 mt-1 flex-shrink-0" />
-              <div>
-                <h3 className="font-semibold text-gray-800">Waktu Pengerjaan</h3>
-                <p className="text-gray-600 text-sm">Tes terdiri dari 80 pertanyaan dan membutuhkan waktu sekitar 8-12 menit.</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <CheckCircleIcon className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
-              <div>
-                <h3 className="font-semibold text-gray-800">Jawab dengan Jujur</h3>
-                <p className="text-gray-600 text-sm">Jawaban yang jujur akan memberikan hasil yang lebih akurat.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Tips */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6, duration: 0.5 }}
-        className="bg-gradient-to-r from-blue-50 to-indigo-50 p-10 rounded-3xl border border-blue-200 mb-10"
-      >
-        <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">
-          Tips untuk Hasil Terbaik
-        </h3>
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="text-center p-6 bg-white rounded-2xl border border-blue-100">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-2xl mb-4">
-              <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <p className="text-gray-700 leading-relaxed">
-              Jawab secara spontan tanpa terlalu banyak berpikir
-            </p>
-          </div>
-          <div className="text-center p-6 bg-white rounded-2xl border border-blue-100">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-2xl mb-4">
-              <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <p className="text-gray-700 leading-relaxed">
-              Pilih jawaban pertama yang muncul di pikiran Anda
-            </p>
-          </div>
-          <div className="text-center p-6 bg-white rounded-2xl border border-blue-100">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-2xl mb-4">
-              <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <p className="text-gray-700 leading-relaxed">
-              Pertanyaan menggambarkan situasi umum dalam hidup
-            </p>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Start Button */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 0.5 }}
-        className="text-center"
-      >
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={handleStartTest}
-          className="inline-flex items-center gap-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-12 py-5 rounded-2xl font-bold text-xl shadow-lg hover:shadow-xl transition-all duration-300"
+        {/* --- INSTRUCTIONS CARD (Glassmorphism) --- */}
+        <motion.div
+          variants={itemVariants}
+          className="bg-white/70 backdrop-blur-xl p-8 md:p-10 rounded-[2.5rem] shadow-xl border border-white/50 mb-10 relative overflow-hidden"
         >
-          <PlayIcon className="w-6 h-6" />
-          Mulai Tes Sekarang
-          <span className="text-2xl ml-2">🚀</span>
-        </motion.button>
+           {/* Decorative sheen */}
+           <div className="absolute top-0 right-0 -mr-16 -mt-16 w-32 h-32 bg-blue-400 opacity-10 blur-2xl rounded-full"></div>
 
-        <p className="text-gray-500 text-sm mt-4">
-          Tes akan dimulai setelah Anda menekan tombol di atas
-        </p>
-      </motion.div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center flex items-center justify-center gap-2">
+            <ShieldCheckIcon className="w-7 h-7 text-indigo-600" />
+            Panduan Tes MBTI
+          </h2>
 
-      {/* Information */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1, duration: 0.5 }}
-        className="mt-16 text-center"
-      >
-        <div className="inline-flex items-center gap-3 px-8 py-4 bg-blue-50 text-blue-800 rounded-2xl text-sm font-medium border border-blue-200">
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-          </svg>
-          <span>Dipercaya oleh lebih dari 50 juta pengguna di seluruh dunia</span>
-        </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Kolom Kiri */}
+            <div className="space-y-6">
+              <GuideItem 
+                icon={CheckBadgeIcon} 
+                color="text-green-500" 
+                bgColor="bg-green-50"
+                title="Tidak Ada Benar/Salah" 
+                desc="Jadilah diri sendiri. Pilih jawaban yang paling menggambarkan kondisi alami Anda."
+              />
+              <GuideItem 
+                icon={ClockIcon} 
+                color="text-blue-500" 
+                bgColor="bg-blue-50"
+                title="Estimasi Waktu" 
+                desc="Tes ini terdiri dari 80 pertanyaan ringan yang memakan waktu sekitar 8-12 menit."
+              />
+            </div>
+
+            {/* Kolom Kanan */}
+            <div className="space-y-6">
+              <GuideItem 
+                icon={BoltIcon} 
+                color="text-yellow-500" 
+                bgColor="bg-yellow-50"
+                title="Skala Penilaian" 
+                desc="Skor 1 (Sangat Tidak Setuju) hingga Skor 5 (Sangat Setuju)."
+              />
+              <GuideItem 
+                icon={HeartIcon} 
+                color="text-red-500" 
+                bgColor="bg-red-50"
+                title="Kejujuran itu Kunci" 
+                desc="Hasil akurat hanya bisa didapat jika Anda menjawab dengan jujur, bukan 'ingin terlihat' seperti apa."
+              />
+            </div>
+          </div>
+        </motion.div>
+
+        {/* --- TIPS SECTION --- */}
+        <motion.div variants={itemVariants} className="mb-12">
+          <h3 className="text-xl font-bold text-gray-800 mb-6 text-center">
+            Tips untuk Hasil Terbaik
+          </h3>
+          <div className="grid md:grid-cols-3 gap-6">
+            <TipCard 
+              icon={BoltIcon}
+              text="Jawab secara spontan tanpa terlalu banyak berpikir (kurang dari 5 detik)"
+            />
+            <TipCard 
+              icon={HeartIcon}
+              text="Pilih jawaban yang muncul pertama kali di benak Anda"
+            />
+            <TipCard 
+              icon={GlobeAsiaAustraliaIcon}
+              text="Bayangkan perilaku Anda dalam situasi sehari-hari, bukan saat tertekan"
+            />
+          </div>
+        </motion.div>
+
+        {/* --- CTA BUTTON --- */}
+        <motion.div variants={itemVariants} className="text-center relative z-10">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleStartTest}
+            className="group relative inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl font-bold text-xl shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all duration-300 overflow-hidden"
+          >
+            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-shimmer"></span>
+            <PlayIcon className="w-6 h-6" />
+            <span>Mulai Tes Sekarang</span>
+          </motion.button>
+
+          <p className="text-gray-500 text-sm mt-6 flex items-center justify-center gap-2">
+            <ShieldCheckIcon className="w-4 h-4" />
+            Data Anda aman & tidak akan dipublikasikan
+          </p>
+        </motion.div>
+
       </motion.div>
-    </motion.div>
+    </div>
+  );
+}
+
+// --- SUB-COMPONENTS untuk kerapian kode ---
+
+function GuideItem({ icon: Icon, title, desc, color, bgColor }) {
+  return (
+    <div className="flex items-start gap-4 p-4 rounded-2xl hover:bg-white/50 transition-colors">
+      <div className={`flex-shrink-0 w-12 h-12 ${bgColor} ${color} rounded-xl flex items-center justify-center`}>
+        <Icon className="w-6 h-6" />
+      </div>
+      <div>
+        <h3 className="font-bold text-gray-900 mb-1">{title}</h3>
+        <p className="text-sm text-gray-600 leading-relaxed">{desc}</p>
+      </div>
+    </div>
+  );
+}
+
+function TipCard({ icon: Icon, text }) {
+  return (
+    <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm text-center hover:shadow-md transition-shadow">
+      <div className="inline-flex items-center justify-center w-12 h-12 bg-gray-50 text-indigo-600 rounded-full mb-4">
+        <Icon className="w-6 h-6" />
+      </div>
+      <p className="text-gray-700 text-sm font-medium leading-relaxed">
+        {text}
+      </p>
+    </div>
   );
 }

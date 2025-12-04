@@ -3,6 +3,5 @@
 @tailwind utilities;
 
 body {
-  @apply bg-gray-50 text-gray-900;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nunito', sans-serif;
 }

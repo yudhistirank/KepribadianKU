@@ -1,60 +1,53 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
 export default function ProgressBar({ current, total }) {
-  const [animatedProgress, setAnimatedProgress] = useState(0);
-  const pct = Math.round((current / total) * 100);
-
-  useEffect(() => {
-    // Animate progress change
-    const timer = setTimeout(() => {
-      setAnimatedProgress(pct);
-    }, 100);
-    return () => clearTimeout(timer);
-  }, [pct]);
+  // Hitung persentase (maksimal 100%)
+  const percentage = Math.min(Math.round((current / total) * 100), 100);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="mb-8"
-    >
-      <div className="flex justify-between items-center mb-3">
-        <div className="text-sm font-medium text-gray-700">
-          Progress Tes
+    <div className="w-full">
+      {/* Label Bagian Atas */}
+      <div className="flex justify-between items-end mb-2 px-1">
+        <div className="flex flex-col">
+          <span className="text-xs font-bold uppercase tracking-widest text-gray-400">
+            Progress
+          </span>
+          <span className="text-sm font-semibold text-gray-700">
+            {current} <span className="text-gray-400 font-normal">/</span> {total}
+          </span>
         </div>
-        <div className="text-sm font-semibold text-indigo-600">
-          {current} / {total}
+        
+        <div className="text-right">
+          <span className="text-sm font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded-lg">
+            {percentage}%
+          </span>
         </div>
       </div>
 
-      <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden shadow-inner">
+      {/* Track Progress Bar */}
+      <div className="h-3 w-full bg-gray-100 rounded-full overflow-hidden shadow-inner border border-gray-100">
+        {/* Fill Progress Bar */}
         <motion.div
           initial={{ width: 0 }}
-          animate={{ width: `${animatedProgress}%` }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full relative overflow-hidden"
+          animate={{ width: `${percentage}%` }}
+          transition={{ duration: 0.8, ease: "circOut" }}
+          className="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 rounded-full relative overflow-hidden"
         >
-          {/* Animated shine effect */}
+          {/* Animated Shine Effect (Kilauan) */}
           <motion.div
-            initial={{ x: '-100%' }}
-            animate={{ x: '100%' }}
+            initial={{ x: "-100%" }}
+            animate={{ x: "100%" }}
             transition={{
-              duration: 2,
+              duration: 1.5,
               repeat: Infinity,
-              repeatDelay: 1,
-              ease: "easeInOut"
+              repeatDelay: 0.5,
+              ease: "linear",
             }}
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent w-1/2 h-full skew-x-12"
           />
         </motion.div>
       </div>
-
-      <div className="mt-2 text-center">
-        <span className="text-sm text-gray-600">
-          {animatedProgress}% selesai
-        </span>
-      </div>
-    </motion.div>
+    </div>
   );
 }
